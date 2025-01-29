@@ -11,11 +11,11 @@ func printSlice[T any] (items []T) {
 	}
 
 }
-func compPrint[T comparable,V string](items []T) {
-	for _, item := range items {
-		fmt.Println(item)
-	}
-}
+//func compPrint[T comparable,V string](items []T) {
+	//for _, item := range items {
+		//fmt.Println(item)
+	//}
+//}
 func printSliceIntString[T string | int](items []T){
 	for _, item := range items{
 		fmt.Println(item)
