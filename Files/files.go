@@ -1,16 +1,57 @@
 package main
 
-import "os"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func main() {
- //create file
- f,err := os.Create("example.txt")
- if err != nil {
+
+ // read and write file(streaming fashion)
+
+ sourceFile,err:= os.Open("text.txt")
+ if err!=nil{
 	 panic(err)
 	  }
-defer f.Close()
+defer sourceFile.Close()
 
-f.WriteString("hello world\n")
+ destinationFile,err:=os.Create("copy_text.txt")
+ if err!=nil{
+	 panic(err)
+	  }
+	defer destinationFile.Close()	
+	reader := bufio.NewReader(sourceFile)
+	writer:=bufio.NewWriter(destinationFile)
+	for{
+		b,err:=reader.ReadByte()
+		if err!=nil{
+			if err.Error() !="EOF"{
+	  panic(err)
+			}
+			break
+			
+		
+		}
+		e:=writer.WriteByte(b)
+		if e!=nil{
+			panic(e)
+		}
+
+
+	}
+	writer.Flush()
+	fmt.Println("file copied")
+
+
+ //create file
+//  f,err := os.Create("example.txt")
+//  if err != nil {
+// 	 panic(err)
+// 	  }
+// defer f.Close()
+
+// f.WriteString("hello world\n")
 
 
 	// f,err:=os.Open("text.txt")
