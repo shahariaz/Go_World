@@ -15,7 +15,7 @@ import (
 // 	result <- res
 // }
 // }
-func emailSender( emailChan chan string,donechan chan bool){
+func emailSender( emailChan <- chan string,donechan chan bool){
 	defer func ()  {
 		donechan <- true
 		
